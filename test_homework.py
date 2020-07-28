@@ -4,6 +4,7 @@ import time
 import sys
 from  appium.webdriver.common.touch_action import TouchAction
 import random
+from selenium.webdriver.support.ui import WebDriverWait
 
 sys.path.append("..")
 
@@ -56,7 +57,7 @@ class TestDw():
             return i[0]
         return('霍格沃兹' + '-' + str(i[0]))
     
-
+#这里参数化pytest
     @pytest.mark.run(order=1)
     def test_add(self):
         """
@@ -70,7 +71,7 @@ class TestDw():
         time.sleep(1)
         mail_list = self.driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout[2]/android.widget.TextView').click()
 
-        #点击手动添加
+        #点击手动添加需要 滚动查找
         print("点击手动添加")
         self.driver.implicitly_wait(1)
         add_manually = self.driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[last()]/android.widget.RelativeLayout/android.widget.ImageView').click()
@@ -96,6 +97,8 @@ class TestDw():
         #保存
         save = self.driver.find_element_by_id('com.tencent.wework:id/h9w').click()
         print("保存成功")
+        #断言 toast 保存成功 采用显示等待
+        WebDriverWait(self.driver,10).untile(lambda x:x.find_element)
         self.driver.implicitly_wait(1)
 
     @pytest.mark.run(order=2)
