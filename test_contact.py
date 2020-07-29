@@ -19,3 +19,7 @@ class TestContact:
             set_name(name).set_gender(gender).set_phonnum(phonenum).click_save()
         text = mypage.get_toast()
         assert '成功' in text
+
+    def test_delete(self):
+        mydelete = self.main.goto_contactlist().search_contact().click_more().click_edit().click_delete()
+

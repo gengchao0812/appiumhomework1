@@ -17,6 +17,9 @@ class ContactAddPage(BasePage):
     female_element=(MobileBy.XPATH,"//*[contains(@text , '女')]")
     phonemenum = (MobileBy.XPATH,"//*[@text='手机号']")
     save = (MobileBy.ID,"com.tencent.wework:id/h9w")
+    delete_element = (MobileBy.XPATH,"//*[contains(@text , '删除成员')]")
+    enter_element = (MobileBy.XPATH,"//*[contains(@text , '确定')]")
+
     def set_name(self,name):
         # name = self.driver.find_element_by_xpath(
         #     '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.RelativeLayout/android.widget.EditText').send_keys(
@@ -49,5 +52,12 @@ class ContactAddPage(BasePage):
         # save = self.driver.find_element_by_id('com.tencent.wework:id/h9w').click()
         self.find_and_click(self.save)
         return AddMemberPage(self.driver)
+
+    def click_delete(self):
+        from addmemberpage import AddMemberPage
+        self.find_and_click(self.delete_element)
+        self.find_and_click(self.enter_element)
+        return AddMemberPage(self.driver)
+
 
 

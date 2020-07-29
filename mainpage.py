@@ -25,7 +25,8 @@ class MainPage(BasePage):
         """
         # time.sleep(1)
         # mail_list = self.driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout[2]/android.widget.TextView').click()
-        self.find_and_click(self.contactlist)
+        # self.find_and_click(self.contactlist)
+        self.driver.find_element(MobileBy.XPATH, "//android.widget.TextView[@text='通讯录']")
         return ContactListPage(self.driver)
 
     def goto_workbench(self):
