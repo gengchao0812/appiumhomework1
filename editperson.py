@@ -5,7 +5,7 @@ import random
 from selenium.webdriver.support.ui import WebDriverWait
 from personalinformation import PersonalInformation
 """
-搜索结果页点击人员条目后的跳转页 个人信息页
+搜索结果页点击人员条目后的跳转页 个人信息页11
 """
 
 class EditPerson(BasePage):
