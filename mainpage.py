@@ -1,7 +1,6 @@
 import  pytest
 from appium import  webdriver
 import time
-import sys
 from  appium.webdriver.common.touch_action import TouchAction
 import random
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,6 +15,7 @@ class MainPage(BasePage):
     #不要暴露内部界面元素给外部
     #定义位置和调用要分开
     contactlist = (MobileBy.XPATH, "//android.widget.TextView[@text='通讯录']")
+    contactlist1 = (MobileBy.XPATH,"/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout[2]/android.widget.TextView")
 
     def goto_contactlist(self):
 
@@ -26,7 +26,9 @@ class MainPage(BasePage):
         # time.sleep(1)
         # mail_list = self.driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout[2]/android.widget.TextView').click()
         # self.find_and_click(self.contactlist)
-        self.driver.find_element(MobileBy.XPATH, "//android.widget.TextView[@text='通讯录']")
+        time.sleep(1)
+        self.find_and_click(self.contactlist)
+        time.sleep(2)
         return ContactListPage(self.driver)
 
     def goto_workbench(self):

@@ -37,7 +37,7 @@ class App(BasePage):
             print("初始化完毕")
             self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub",desired_caps)
             print("开始等待")
-            self.driver.implicitly_wait(5)
+            self.driver.implicitly_wait(15)
         #否则直接启动 launch不需要传入任何参数，会直接启动desired_caps定义的active
         #star_activity（packagename,activityname）可以启动其他的
         else:

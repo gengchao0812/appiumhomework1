@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from basepage import BasePage
 from appium.webdriver.common.mobileby import MobileBy
 
+
 class ContactAddPage(BasePage):
 
     name_element = (MobileBy.XPATH,"//*[contains(@text , '姓名')]/../*[@class='android.widget.EditText']")
@@ -57,7 +58,9 @@ class ContactAddPage(BasePage):
         from addmemberpage import AddMemberPage
         self.find_and_click(self.delete_element)
         self.find_and_click(self.enter_element)
-        return AddMemberPage(self.driver)
+        self.back(1)
+        from contactlistpage import ContactListPage
+        return ContactListPage(self.driver)
 
 
 

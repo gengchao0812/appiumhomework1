@@ -1,7 +1,6 @@
 from  appium.webdriver.common.touch_action import TouchAction
 import random
 from selenium.webdriver.support.ui import WebDriverWait
-from contactlistpage import ContactListPage
 from appium.webdriver.common.mobileby import MobileBy
 from basepage import BasePage
 

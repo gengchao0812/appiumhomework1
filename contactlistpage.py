@@ -9,16 +9,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from basepage import BasePage
 
 from addmemberpage import AddMemberPage
-from searchpage import SearchPage
 from editperson import EditPerson
 """
 通讯录列表页
 """
 class ContactListPage(BasePage):
+
     add_contact_element = "添加成员"
     edit_contact_element = (MobileBy.ID,'com.tencent.wework:id/h9z')
-    select_contact_element = (MobileBy.ID,'//*[contains(@text,"搜索")]')
-    resurt_contact_element = (MobileBy.XPATH,'//*[contains(@text,"张三")]')
+    select_contact_element = (MobileBy.XPATH,'//*[@class="android.widget.EditText"]')
+
     def add_contact(self):
         """
         添加联系人界面
@@ -33,8 +33,21 @@ class ContactListPage(BasePage):
         self.find_by_scroll(self.add_contact_element).click()
         return AddMemberPage(self.driver)
 
-    def search_contact(self):
-        self.find(self.search_contact_element)
+    def search_contact(self,name):
+        result_contact_element = (MobileBy.XPATH, f'//*[contains(@text,"{name}")]')
+        # result_null_element = (MobileBy.XPATH, '//*[@text="无搜索结果"]')
+        self.find_and_click(self.edit_contact_element)
         self.find_and_sendkeys(self.select_contact_element,name)
-        result = self.find(self.resurt_contact_element)
+        time.sleep(1)
+        result_more_element = (MobileBy.XPATH, f'//*[@class="android.widget.TextView" and @text="{name}"]')
+        assert len(self.finds(result_more_element))!=0,"搜索结果为空，没有用户可以被删除"
+        # if len(self.finds(self.result_null_element))>0:
+        #     print('搜索无结果')
+        #     return
+        # else:
+        self.find_and_click(result_more_element)
         return EditPerson(self.driver)
+
+    def assert_contact(self,name):
+        result_more_element = (MobileBy.XPATH, f'//*[@class="android.widget.TextView" and @text="{name}"]')
+        assert len(self.finds(result_more_element))>0,"删除用户失败"

@@ -7,19 +7,21 @@ class TestContact:
     def teardown_class(self):
         pass
 
-    def test_addcontact(self):
-        """
-        添加联系人
-        :return:
-        """
-        name = "霍格name1"
-        gender = "女"
-        phonenum = "15811111111"
-        mypage = self.main.goto_contactlist().add_contact().add_menual().\
-            set_name(name).set_gender(gender).set_phonnum(phonenum).click_save()
-        text = mypage.get_toast()
-        assert '成功' in text
+    # def test_addcontact(self):
+    #     """
+    #     添加联系人
+    #     :return:
+    #     """
+    #     name = "霍格name1"
+    #     gender = "女"
+    #     phonenum = "15811111111"
+    #     mypage = self.main.goto_contactlist().add_contact().add_menual().\
+    #         set_name(name).set_gender(gender).set_phonnum(phonenum).click_save()
+    #     text = mypage.get_toast()
+    #     assert '成功' in text
 
     def test_delete(self):
-        mydelete = self.main.goto_contactlist().search_contact().click_more().click_edit().click_delete()
+        name = "霍格"
+        # self.main.goto_contactlist()
+        self.main.goto_contactlist().search_contact(name).click_more().click_edit().click_delete().assert_contact(name)
 
