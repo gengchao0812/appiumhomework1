@@ -43,7 +43,11 @@ class BasePage:
                                         '.scrollIntoView(new UiSelector()'
                                         f'.text("{text}").instance(0));')
 
+    def find_by_text_awT(text):
+        return self.find(MobileBy.XPATH, f'//*[@class="android.widget.TextView" and @text="{text}"]')
 
+    def find_by_text(text):
+        return self.find((MobileBy.XPATH, f'// *[contains(@ text, "{text}")]')
 
     def webdriver_wait(self, locator,timeout=10):
         element = WebDriverWait(self.driver,timeout).untile(
